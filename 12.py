@@ -17,16 +17,17 @@ def find_triagnle_number(x):
     global maxFactor
     for i in range(1,x+1):
         tri = i + tri
-    factors = factor_number(tri)
-    if factors>maxFactor:
-        maxFactor = factors
-        print ("The ",x," triangle number is ", tri," has current highest ",factors," factors")
-    if maxFactor>500:
-        print ("Found over 500 factors for the triangle number ",x," was ",factors)
-        exit()
+        #print("triangular number ",i," = ", tri);
+        factors = factor_number(tri)
+        if factors>maxFactor:
+            maxFactor = factors
+            print ("The ",i," triangle number is ", tri," has current highest ",factors," factors")
+        if maxFactor>500:
+            print ("Found over 500 factors for the triangle number ",tri," was ",factors)
+            exit()
     
 
 x = 0
-for x in iter(lambda: x+1, -1):
-    find_triagnle_number(x)
+#for x in iter(lambda: x+1, -1):
+find_triagnle_number(10000000000000)
     
