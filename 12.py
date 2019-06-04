@@ -1,33 +1,48 @@
 # script to solve project euler problem 12
-
-maxFactor = 0
-
-def factor_number(x):
-    #print ("The factors of",x," are")
-    numberOfFactors = 0;
+import time
+import math 
+def v(x):
+    numberOfFactors = 0
     for i in range(1,x+1):
         if x % i == 0:
-            #print(i)
             numberOfFactors+=1
     return numberOfFactors
 
+def factor_number(n):
+    number_of_factors = 0
+    for i in range(1, int(math.ceil(math.sqrt(n)))):
+        if n % i == 0:
+            number_of_factors +=2
+        else:
+            continue
+    return number_of_factors
 
-def find_triagnle_number(x):
-    tri = 0
-    global maxFactor
-    for i in range(1,x+1):
-        tri = i + tri
-        #print("triangular number ",i," = ", tri);
-        factors = factor_number(tri)
-        if factors>maxFactor:
-            maxFactor = factors
-            print ("The ",i," triangle number is ", tri," has current highest ",factors," factors")
-        if maxFactor>500:
-            print ("Found over 500 factors for the triangle number ",tri," was ",factors)
-            exit()
+
+def tri(x):
+    num = x*((x+1)/2)
+    return int(num)
     
 
-x = 0
-#for x in iter(lambda: x+1, -1):
-find_triagnle_number(10000000000000)
-    
+def find_tris(x):
+    for i in range (1, x, 1):
+        start=time.time()
+        tr = tri(i)
+        triTime = (time.time() - start)
+
+        start=time.time()
+        facts = factor_number(tr)
+        factTime = (time.time() - start)
+
+        if facts >=400:
+            print("found triangle number ", tr, " with ", facts, " factors, times: tri=",triTime, " fac=", factTime);
+            if facts >=500:
+                exit()
+                
+if tri(7) != 28:
+    print("error did not pass test, tr4(7) should be 28, we got ", tri(7));
+    exit();
+if factor_number(tri(7)) != 6:
+    print("error did not pass test, number of factors of tri(7) = 28 = 6, we got ", factor_number(tri(7)))
+    exit();
+
+find_tris(10000000000);    
